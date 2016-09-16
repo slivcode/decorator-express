@@ -5,10 +5,12 @@
     "noImplicitAny": false,
     "sourceMap": true,
     "outDir": "build",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "declaration": true
   },
   "exclude": [
-    "./tmp"
+    "./tmp",
+    "node_modules"
   ],
   "compileOnSave": true
 }

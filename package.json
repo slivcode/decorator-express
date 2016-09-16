@@ -2,7 +2,8 @@
   "name": "decorator-express",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
   "scripts": {
     "prepublish": "npm run build && npm test",
     "clean": "rimraf -r build .nyc_output coverage",
@@ -20,6 +21,7 @@
     "@types/express": "^4.0.32",
     "@types/sinon": "^1.16.29",
     "@types/supertest": "^1.1.30",
+    "@types/webpack": "^1.12.34",
     "ava": "^0.16.0",
     "clear": "0.0.1",
     "coveralls": "^2.11.13",
@@ -27,8 +29,8 @@
     "nyc": "^8.3.0",
     "rimraf": "^2.5.4",
     "sinon": "^2.0.0-pre.2",
-    "supertest": "^2.0.0",
-    "supertest-as-promised": "^4.0.0"
+    "supertest-as-promised": "^4.0.0",
+    "typescript": "^2.0.0"
   },
   "dependencies": {
     "deep-assign": "^2.0.0"

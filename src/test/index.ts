@@ -4,8 +4,9 @@ import * as supertest from "supertest-as-promised"
 import * as express from 'express'
 import { createMethodDecorator } from '../util/method-decorator'
 import { ExpressRouter, ExpressApp } from '../decorator/router'
-import { GET, POST } from '../decorator/method'
+import { GET, POST, MSQS, MSBD } from '../decorator/method'
 import { spy } from 'sinon'
+import { PARAM } from '../decorator/params'
 
 test('outer option test', (t) => {
   let GET = createMethodDecorator('get')
@@ -151,4 +152,41 @@ test('optioned router decorator', async(t) => {
   t.is(resp.status, 404)
   resp = await EP.get('/HELLO')
   t.is(resp.status, 200)
+})
+
+test('microservice style decorator test', async(t) => {
+  @ExpressApp
+  class App {
+    @MSQS('/')
+    async index({name}) {
+      return await Promise.resolve({ans: {name}})
+    }
+  }
+
+  let EP = supertest(App)
+  let resp = await EP.post('/?name=something')
+  t.is(resp.status, 200)
+  t.is(JSON.stringify(resp.body), JSON.stringify({ans: {name: 'something'}}))
+})
+
+test('param test', async(t) => {
+  @ExpressApp
+  class App {
+
+    @PARAM('id')
+    addId(req, res, next, id) {
+      req.user = id
+      next()
+    }
+
+    @GET('/:id')
+    async index(req, res) {
+      res.send(req.user)
+    }
+  }
+
+  let EP = supertest(App)
+  let resp = await EP.get('/123')
+  t.is(resp.text, '123')
+
 })
