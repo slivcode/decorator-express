@@ -29,6 +29,7 @@
     "nyc": "^8.3.0",
     "rimraf": "^2.5.4",
     "sinon": "^2.0.0-pre.2",
+    "supertest": "^2.0.0",
     "supertest-as-promised": "^4.0.0",
     "typescript": "^2.0.0"
   },
