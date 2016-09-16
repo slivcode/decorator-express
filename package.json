@@ -6,6 +6,8 @@
   "scripts": {
     "prepublish": "npm run build && npm test",
     "clean": "rm -r build",
+    "cover": "nyc ava build/test/**/*.js",
+    "cover:report": "nyc report --reporter=html ava build/test/**/*.js",
     "test": "ava build/test/**/*.js",
     "test:watch": "npm run test -- '-w build'",
     "build": "tsc",
@@ -20,10 +22,12 @@
     "@types/supertest": "^1.1.30",
     "ava": "^0.16.0",
     "clear": "0.0.1",
+    "coveralls": "^2.11.13",
+    "express": "^4.14.0",
+    "nyc": "^8.3.0",
     "sinon": "^2.0.0-pre.2",
     "supertest": "^2.0.0",
-    "supertest-as-promised": "^4.0.0",
-    "express": "^4.14.0"
+    "supertest-as-promised": "^4.0.0"
   },
   "dependencies": {
     "deep-assign": "^2.0.0"

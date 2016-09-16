@@ -1,8 +1,12 @@
 language: node_js
 node_js:
-    - "6"
+  - "6"
+  - "5"
+  - "4"
 before_install:
-    - npm install -g typescript@2.0.0
-    - npm install
-    - npm run build
+  - npm install -g typescript@2.0.0
+  - npm install
+  - npm run build
 script: npm test
+after_success:
+  - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
