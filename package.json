@@ -1,0 +1,33 @@
+{
+  "name": "decorator-express",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "npm run build && npm test",
+    "clean": "rm -r build",
+    "test": "ava build/test/**/*.js",
+    "test:watch": "npm run test -- '-w build'",
+    "build": "tsc",
+    "build:watch": "npm run build -- '-w'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.0.32",
+    "@types/sinon": "^1.16.29",
+    "@types/supertest": "^1.1.30",
+    "ava": "^0.16.0",
+    "clear": "0.0.1",
+    "sinon": "^2.0.0-pre.2",
+    "supertest": "^2.0.0",
+    "supertest-as-promised": "^4.0.0"
+  },
+  "dependencies": {
+    "deep-assign": "^2.0.0"
+  },
+  "peerDependencies": {
+    "express": "^4.14.0"
+  }
+}
