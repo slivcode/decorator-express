@@ -8,8 +8,7 @@
     "experimentalDecorators": true
   },
   "exclude": [
-    "./tmp",
-    "node_modules"
+    "./tmp"
   ],
   "compileOnSave": true
 }
