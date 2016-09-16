@@ -22,7 +22,8 @@
     "clear": "0.0.1",
     "sinon": "^2.0.0-pre.2",
     "supertest": "^2.0.0",
-    "supertest-as-promised": "^4.0.0"
+    "supertest-as-promised": "^4.0.0",
+    "express": "^4.14.0"
   },
   "dependencies": {
     "deep-assign": "^2.0.0"
