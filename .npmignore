@@ -1,6 +1,6 @@
 src
 tmp
-.travis-ci.yml
+.travis.yml
 tsconfig.json
 tslint.json
 .gitignore
