@@ -6,6 +6,8 @@ before_install:
   - npm install
   - npm run build
 script: npm test
+env:
+
 after_success:
   - npm run cover
   - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
