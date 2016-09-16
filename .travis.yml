@@ -6,5 +6,3 @@ before_script:
     - npm install
     - npm run build
 script: npm test
-env:
-    - NODE_ENV=production
