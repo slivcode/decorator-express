@@ -1,13 +1,20 @@
 language: node_js
 node_js:
-  - "6"
+- '6'
 before_install:
-  - npm install -g typescript@2.0.0
-  - npm install
-  - npm run build
+- npm install -g typescript@2.0.0
+- npm install
+- npm run build
 script: npm test
-env:
-
+env: 
 after_success:
-  - npm run cover
-  - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
+- npm run cover
+- "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
+deploy:
+  provider: npm
+  email: sliv.code@gmail.com
+  api_key:
+    secure: Fc8lS/xa/VjWg8wrpLz5tP552+j67d8l84nVkp9EEwI8FehqeBa4NyktNnj1FjZoECTR/GZEpNjI2K/lSMryZLPoXrQ+WqsEvQuhOak+HSNryADzTeS20ylTYPf4sHAE8DN8jOSHLir3Xl7CsufVJT8KDQbhp8Cf6lAhkHFrPlXDajJca67D/iHMJgIZ0IsyJzeqir7gJQVgKkG1BmUJEwqRPea2UXR26QKtaIFpSA0P/B5ItgYJCWiuzdadbHv+yosNtLQAQlrU5YmRtKEvRiINSQ8a76ms+oVV48+PRfVOKqvNCAO5n9JUcGE5t8wyUJwgV9vV3j+6uQt4djEMOhsL28Kl6k5Omaoqx92ujhfsGXBA79WFs0+4sWgA1NjSaDUFca6DxeQ/S4xqcXsbLNQHykNULRU2lQFF1v7+zx8qy/0NIvJZidXsI79O7FED8Qb6Dd27zS9dyXo+Vu55urhc8s9Kr9lriE9IzoZIDcXOGetMf4YdL8lkxcz4hr+2OHByYwe/rfOdq70fbbka1D7YpaLHdlQGjjODJwwA7+pjuWRcuA3fIeGc5Rp1yWoIk/PjQUPxgp1kwFeLJi4YwRu96bC0LTdlG58fgGai1CSTlmTuYsVlwqqPHSiOxRZSVpxO1JlZ8fHwvEp5P23kwTJ8jtF9rRDqywjBT44MKrY=
+  on:
+    tags: true
+    repo: slivcode/decorator-express

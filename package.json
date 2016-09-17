@@ -1,7 +1,7 @@
 {
   "name": "decorator-express",
   "version": "0.0.1",
-  "description": "",
+  "description": "a wip, simpler version of es7 decorator express",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
   "scripts": {
