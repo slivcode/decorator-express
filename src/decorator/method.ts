@@ -5,7 +5,3 @@ export let DELETE = createMethodDecorator('delete')
 export let PATCH = createMethodDecorator('patch')
 export let PUT = createMethodDecorator('put')
 export let ALL = createMethodDecorator('all')
-
-// microservice style handling
-export let MSQS = createMethodDecorator('_msqs')
-export let MSBD = createMethodDecorator('_msbd')

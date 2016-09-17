@@ -1,0 +1,4 @@
+let defaultMethodHandler = (router, method) => {
+
+}
+

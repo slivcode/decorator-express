@@ -4,9 +4,10 @@ import * as supertest from "supertest-as-promised"
 import * as express from 'express'
 import { createMethodDecorator } from '../util/method-decorator'
 import { ExpressRouter, ExpressApp } from '../decorator/router'
-import { GET, POST, MSQS, MSBD } from '../decorator/method'
+import { GET, POST } from '../decorator/method'
 import { spy } from 'sinon'
 import { PARAM } from '../decorator/params'
+import { MSQS } from '../decorator/microservice'
 
 test('outer option test', (t) => {
   let GET = createMethodDecorator('get')
@@ -164,7 +165,7 @@ test('microservice style decorator test', async(t) => {
   }
 
   let EP = supertest(App)
-  let resp = await EP.post('/?name=something')
+  let resp = await EP.get('/?name=something')
   t.is(resp.status, 200)
   t.is(JSON.stringify(resp.body), JSON.stringify({ans: {name: 'something'}}))
 })
@@ -189,4 +190,13 @@ test('param test', async(t) => {
   let resp = await EP.get('/123')
   t.is(resp.text, '123')
 
+})
+
+test('express app setting decorator test', async(t) => {
+  @ExpressApp({set: {'x-powered-by': false}, mountpath: '/test'})
+  class App {
+
+  }
+  t.is((App as any).get('x-powered-by'), false)
+  t.is((App as any).mountpath, '/test')
 })
