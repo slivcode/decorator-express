@@ -7,7 +7,7 @@ import { ExpressRouter, ExpressApp } from '../decorator/router'
 import { GET, POST } from '../decorator/method'
 import { spy } from 'sinon'
 import { PARAM } from '../decorator/params'
-import { MSQS } from '../decorator/microservice'
+import { MSQS, PATTERN } from '../decorator/microservice'
 
 test('outer option test', (t) => {
   let GET = createMethodDecorator('get')
@@ -200,3 +200,18 @@ test('express app setting decorator test', async(t) => {
   t.is((App as any).get('x-powered-by'), false)
   t.is((App as any).mountpath, '/test')
 })
+//
+// test('microservice', async(t) => {
+//   @ExpressApp
+//   class App {
+//     @PATTERN({hello: 'world'})
+//     async hello() {
+//       return 'hello'
+//     }
+//   }
+//
+//   let EP = supertest(App)
+//   let resp = await EP.post('/')
+//   t.is(resp.status, 404)
+//   // TODO: just write some test
+// })
