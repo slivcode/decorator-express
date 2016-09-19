@@ -3,7 +3,33 @@ import { parse } from 'url'
 export let bindContainer = (router, cfg) => {
   if (!cfg) return
   if (cfg.option && cfg.option.middlewares) {
-    router.use(cfg.option.middlewares)
+    cfg.option.middlewares.forEach((middleware) => {
+      switch (Array.isArray(middleware)) {
+        case true:
+          let isRoutePath = typeof middleware[0] === 'string' || typeof middleware[0] === 'array' || middleware[0] instanceof RegExp
+          if (isRoutePath) {
+            router.use(middleware[0], middleware[1])
+          }
+          break
+        default:
+          router.use(middleware)
+      }
+    })
+
+    // for (let middleware of cfg.option.middlewares) {
+    //   if (Array.isArray(middleware)) {
+    //     let isRoutePath = typeof middleware[0] === 'string' || typeof middleware[0] === 'array' || middleware[0] instanceof RegExp
+    //     if (isRoutePath) {
+    //       router.apply(router, middleware)
+    //     } else {
+    //       router.use(middleware)
+    //     }
+    //   } else {
+    //     router.use(middleware)
+    //   }
+    //
+    // }
+
   }
   if (cfg.param) {
     for (let t in cfg.param) {

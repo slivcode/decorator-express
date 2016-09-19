@@ -200,18 +200,20 @@ test('express app setting decorator test', async(t) => {
   t.is((App as any).get('x-powered-by'), false)
   t.is((App as any).mountpath, '/test')
 })
+
+test('use route with path test', async(t) => {
+  @ExpressApp
+  @USE(['/r1', (req, res) => res.send('done')])
+  class App {
+    @MSQS('/')
+    r() {
+      return 'hello'
+    }
+  }
+
+  let EP = supertest(App)
+  let resp = await EP.get('/r1')
+  t.is(resp.text, 'done')
+
+})
 //
-// test('microservice', async(t) => {
-//   @ExpressApp
-//   class App {
-//     @PATTERN({hello: 'world'})
-//     async hello() {
-//       return 'hello'
-//     }
-//   }
-//
-//   let EP = supertest(App)
-//   let resp = await EP.post('/')
-//   t.is(resp.status, 404)
-//   // TODO: just write some test
-// })
