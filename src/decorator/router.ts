@@ -18,6 +18,7 @@ let makeHandler = (fn) => (a1) => {
   if (a1isConfig) {
     let optionedRouterHandler = (target) => {
       let router = fn(a1)
+      router.__base_class = a1
       configRouter(router, target)
       bindContainerProps(router, a1)
       return router
@@ -25,6 +26,7 @@ let makeHandler = (fn) => (a1) => {
     return optionedRouterHandler
   }
   let router = fn()
+  router.__base_class = a1
   configRouter(router, a1)
 
   return router as any

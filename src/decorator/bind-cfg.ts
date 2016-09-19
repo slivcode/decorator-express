@@ -16,20 +16,6 @@ export let bindContainer = (router, cfg) => {
       }
     })
 
-    // for (let middleware of cfg.option.middlewares) {
-    //   if (Array.isArray(middleware)) {
-    //     let isRoutePath = typeof middleware[0] === 'string' || typeof middleware[0] === 'array' || middleware[0] instanceof RegExp
-    //     if (isRoutePath) {
-    //       router.apply(router, middleware)
-    //     } else {
-    //       router.use(middleware)
-    //     }
-    //   } else {
-    //     router.use(middleware)
-    //   }
-    //
-    // }
-
   }
   if (cfg.param) {
     for (let t in cfg.param) {

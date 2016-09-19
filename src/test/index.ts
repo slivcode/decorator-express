@@ -8,6 +8,8 @@ import { GET, POST } from '../decorator/method'
 import { spy } from 'sinon'
 import { PARAM } from '../decorator/params'
 import { MSQS, PATTERN } from '../decorator/microservice'
+import { LISTEN } from '../decorator/listen'
+import { hostname } from 'os'
 
 test('outer option test', (t) => {
   let GET = createMethodDecorator('get')
@@ -216,4 +218,46 @@ test('use route with path test', async(t) => {
   t.is(resp.text, 'done')
 
 })
-//
+
+test('LISTEN decorator', async(t) => {
+  let PORT = "8000"
+  let HOST = "localhost"
+  let _PORT = process.env.PORT
+  let _HOST = process.env.HOST
+  process.env.PORT = PORT
+  process.env.HOST = HOST
+  @LISTEN
+  @ExpressApp
+  class SimpleService {
+    static listen
+
+    @MSQS('/')
+    async r() {
+      return {ok: true}
+    }
+  }
+
+  let EP = supertest(`http://localhost:${PORT}`)
+  let resp = await EP.get('/')
+  t.is(JSON.stringify(resp.body), JSON.stringify({ok: true}))
+  process.env.PORT = _PORT
+  process.env.HOST = _HOST
+
+  PORT = '5000'
+  HOST = hostname()
+
+  @LISTEN(parseInt(PORT), HOST, () => console.log('other handler'))
+  @ExpressApp
+  class NextService {
+    static listen
+
+    @MSQS('/')
+    async r() {
+      return {ok: true}
+    }
+  }
+
+  EP = supertest(`http://${HOST}:${PORT}`)
+  resp = await EP.get('/')
+  t.is(JSON.stringify(resp.body), JSON.stringify({ok: true}))
+})
